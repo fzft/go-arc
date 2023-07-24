@@ -1,10 +1,11 @@
 package goarc
 
 import (
-	"bufio"
+	"context"
+	"fmt"
 	"io"
 	"os"
-	"strconv"
+	"strings"
 )
 
 type Arc struct {
@@ -16,38 +17,19 @@ func New(out, err io.Writer) *Arc {
 }
 
 // Run starts the application,
-func (a *Arc) Run() error {
-	scanner := bufio.NewScanner(os.Stdin)
+func (a *Arc) Run(_ context.Context) error {
 	a.outWriter.Println("hello, welcome to go-arc!")
 
-	for {
-		a.outWriter.Println("Choose an option:")
-		a.outWriter.Println("1. First choice")
-		a.outWriter.Println("2. Second choice")
-		a.outWriter.Println("3. Third choice")
-		a.outWriter.Println("4. Exit")
-
-		scanner.Scan()
-		input := scanner.Text()
-
-		choice, err := strconv.Atoi(input)
-		if err != nil {
-			a.errWriter.Println("Invalid choice")
-			continue
-		}
-
-		switch choice {
-		case 1:
-			a.outWriter.Println("First choice")
-		case 2:
-			a.outWriter.Println("Second choice")
-		case 3:
-			a.outWriter.Println("Third choice")
-		case 4:
-			a.outWriter.Println("Goodbye!")
-			return nil
-		default:
-			a.errWriter.Println("Invalid choice")
+	// interact with user, collect answers
+	for _, qa := range *QAs {
+		if err := qa.Ask(); err != nil && strings.Contains(err.Error(), "interrupt") {
+			os.Exit(1)
 		}
 	}
+
+	for _, qa := range *QAs {
+		fmt.Printf("Answer: %v\n", qa.Answer)
+	}
+
+	return nil
 }

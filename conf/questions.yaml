@@ -1,0 +1,46 @@
+questions:
+  - id: 1
+    component: "web-framework"
+    selection: 0
+    prompt: "what web framework do you prefer?"
+    choices:
+    - gin
+    - fiber
+    - echo
+
+  - id: 2
+    component: "database"
+    selection: 1
+    prompt: "What are the databases you want to use?"
+    choices:
+      - mysql
+      - mongo
+      - postgresql
+      - redis
+
+  - id: 3
+    component: "messaging"
+    selection: 1
+    prompt: "what are the messagings do you want to use"
+    choices:
+      - kafka
+      - redis
+      - rabbit-mq
+
+  - id: 4
+    component: "log"
+    selection:
+    prompt: "what log lib do you prefer?"
+    choices:
+      - logrus
+      - zap
+
+  - id: 5
+    component: "orm"
+    selection: 0
+    prompt: "what orm lib do you prefer?"
+    choices:
+      - gorm
+      - xorm
+
+

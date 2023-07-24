@@ -1,5 +1,8 @@
 # go-arc 
 go-arc is a simple tool to archive files and directories. It is written in Go and uses the standard library only.
+it will give you a golang web application with a basic directory structure.
+it will give you a interactive console to create a new project
+and you can choose the web framework, database, and other components you want to use.
 
 
 ## Prerequisites
