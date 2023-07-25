@@ -22,6 +22,8 @@ func (a *Arc) Run(_ context.Context) error {
 
 	// interact with user, collect answers
 	for _, qa := range *QAs {
+
+		// TODO: FIX ME: this catch interrupt error way is not good, need to find a better way
 		if err := qa.Ask(); err != nil && strings.Contains(err.Error(), "interrupt") {
 			os.Exit(1)
 		}
